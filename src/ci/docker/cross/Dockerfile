@@ -48,19 +48,18 @@ ENV TARGETS=$TARGETS,arm-unknown-linux-musleabihf
 ENV TARGETS=$TARGETS,armv7-unknown-linux-musleabihf
 ENV TARGETS=$TARGETS,sparc64-unknown-linux-gnu
 
-ENV CC_mipsel_unknown_linux_musl=mipsel-openwrt-linux-gcc \
-    CC_mips_unknown_linux_musl=mips-openwrt-linux-gcc \
+ENV CC_mipsel_unknown_linux_musl=mipsel-linux-musl-gcc \
+    CC_mips_unknown_linux_musl=mips-linux-musl-gcc \
     CC_sparc64_unknown_linux_gnu=sparc64-linux-gnu-gcc
-
-# Suppress some warnings in the openwrt toolchains we downloaded
-ENV STAGING_DIR=/tmp
 
 ENV RUST_CONFIGURE_ARGS \
       --enable-extended \
       --target=$TARGETS \
       --musl-root-arm=/usr/local/arm-linux-musleabi \
       --musl-root-armhf=/usr/local/arm-linux-musleabihf \
-      --musl-root-armv7=/usr/local/armv7-linux-musleabihf
+      --musl-root-armv7=/usr/local/armv7-linux-musleabihf \
+      --musl-root-mips=/usr/local/mips-linux-musl \
+      --musl-root-mipsel=/usr/local/mipsel-linux-musl
 ENV SCRIPT python2.7 ../x.py dist --target $TARGETS
 
 # sccache
